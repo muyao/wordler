@@ -1,14 +1,9 @@
 import json
 import re
 from pathlib import Path
+from helpers import safeInput
 
 # english-words.json from https://downloadwordlists.com/english/5-letter-words/
-
-def safeInput(datType, prompt):
-	try:
-		return datType(input(prompt))
-	except:
-		return safeInput(datType, prompt)
 
 with open(Path(__file__).resolve().parent / "english-words.json") as f:
 	data = json.load(f)
