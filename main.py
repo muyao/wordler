@@ -33,7 +33,7 @@ for word in usedWords:
 	greens = [(green.split(":")[0], int(green.split(":")[1])) for green in greens if green != ""]
 	print()
 	for ltr, idx in greens:
-		if regex[idx - 1] != ".":
+		if regex[idx - 1] != "." and regex[idx - 1] != ltr:
 			raise Exception()
 		regex[idx - 1] = ltr
 
