@@ -83,8 +83,11 @@ for word in usedWords:
 	yellows = [(yellow.split(":")[0], int(yellow.split(":")[1])) for yellow in yellows if yellow != ""]
 	print()
 	for ltr, idx in yellows:
-		regex.append(f"(?=.*{ltr})")
+		if f"(?=.*{ltr})" not in regex:
+			regex.append(f"(?=.*{ltr})")
 		if greyYellow[idx - 1][0] != "[":
+			continue
+		elif ltr in greyYellow[idx - 1].split("]")[0]:
 			continue
 		greyYellow[idx - 1] = greyYellow[idx - 1].split("]")[0] + ltr + "]"
 
