@@ -5,6 +5,12 @@ from helpers import safeInput
 
 # english-words.json from https://downloadwordlists.com/english/5-letter-words/
 
+CONFIG = {
+	"5": {
+		"openers": "cones,trial,dough"
+	}
+}
+
 with open(Path(__file__).resolve().parent / "english-words.json") as f:
 	data = json.load(f)
 
@@ -17,8 +23,17 @@ print()
 
 regex = ["."] * targLen
 
-usedWords = safeInput(str, "\tWhich words were used? Separate with a comma (,)\n> ")
+if str(targLen) in CONFIG:
+	useConfig = safeInput(str, f"\tUse preconfigured data for word length {targLen}? (y/n)\n> ").lower()
+if useConfig == "y":
+	usedWords = CONFIG[str(targLen)]["openers"]
+else:
+	usedWords = safeInput(str, "\tWhich words were used? Separate with a comma (,)\n> ")
 usedWords = usedWords.lower().replace(" ", "").split(",")
+if useConfig == "y":
+	moreUsedWords = safeInput(str, "\tAdditional words that were used? Separate with a comma (,)\n> ")
+	moreUsedWords = moreUsedWords.lower().replace(" ", "").split(",")
+	usedWords += moreUsedWords
 usedWords = [word for word in usedWords if word != "" and len(word) == targLen]
 print()
 
