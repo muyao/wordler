@@ -23,6 +23,7 @@ print()
 
 regex = ["."] * targLen
 
+useConfig = "n"
 if str(targLen) in CONFIG:
 	useConfig = safeInput(str, f"\tUse preconfigured data for word length {targLen}? (y/n)\n> ").lower()
 if useConfig == "y":
